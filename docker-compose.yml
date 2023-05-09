@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  nodeapp1:
+    container_name: my_api_1
+    build:
+      context: ./my_api/
+      dockerfile: Dockerfile
+    networks:
+      - nginx_net
+    restart: always
+  nodeapp2:
+    container_name: my_api_2
+    build:
+      context: ./my_api/
+      dockerfile: Dockerfile
+    networks:
+      - nginx_net
+    restart: always
+  nodeapp3:
+    container_name: my_api_3
+    build:
+      context: ./my_api/
+      dockerfile: Dockerfile
+    networks:
+      - nginx_net
+    restart: always
+  nginx:
+    container_name: nginx
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090/tcp"
+    networks:
+      - nginx_net
+    restart: always
+
+networks:
+  nginx_net:
+    name: nginx_net
+    driver: bridge
